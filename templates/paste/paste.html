@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block main_class %}paste-main{% endblock %}
+
+{% block title %}{{ paste.token }}{% endblock %}
+
+{% block head_extra %}<link rel="stylesheet" href="/raw/{{ paste.token }}/css">{% endblock %}
+
+{% block base_content %}
+<div class="paste-container">
+  <div class="text-container container-base">{{ paste.content | safe }}</div>
+  <div class="footer-row flex flex-align-start flex-justify-between">
+    <a href="{{ edit_paste_url }}" class="button">Edit</a>
+    <div class="paste-info">
+      Pub: {{ timestamp }}<br>
+      Edit: {{ edit_timestamp }}<br>
+      Owner: <a href="{{ owner_profile_url }}">{{ owner_username }}</a><br>
+      {% include "_theme_toggle.html" %}
+    </div>
+  </div>
+</div>
+{% endblock %}

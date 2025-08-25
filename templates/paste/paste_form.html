@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}{{ site_name }}{% endblock %}
+
+{% block base_content %}
+<div class="paste-container">
+  <form method="POST" action="{{ save_paste_url }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}"/>
+
+    <button type="button" class="tab-button active" data-tab="text">Code</button>
+
+    <div class="flex flex-column flex-gap">
+      <textarea name="content" id="paste-textarea" class="tab-container container-base" required>{{ paste | default(value="") }}</textarea>
+      <div class="flex flex-align-center flex-justify-between">
+        <button type="submit" class="button">Publish</button>
+        <input type="text" name="custom_token" placeholder="Custom URL" class="text-input" />
+      </div>
+      {% include "_theme_toggle.html" %}
+    </div>
+  </form>
+</div>
+{% endblock %}

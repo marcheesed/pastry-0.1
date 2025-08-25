@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Paste {{ paste.token }}{% endblock %}
+
+{% block base_content %}
+<div class="edit-paste-container">  
+  <form method="POST" action="{{ edit_paste_url }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}"/>
+
+    <div class="tab-buttons">
+      <button type="button" class="tab-button active" data-tab="edit">Code</button>
+      <button type="button" class="tab-button" data-tab="full-preview">Full Preview</button>
+    </div>
+    
+    <div class="tab-content" id="edit-tab">
+      <div class="flex flex-column flex-gap">
+        <div class="flex-grid flex-gap">
+          <div class="editors-wrapper flex flex-column flex-gap">
+            <div class="editor-html flex-grow-1">
+              <textarea name="content" id="edit-textarea" required>{{ paste.content | default(value="") }}</textarea>
+            </div>
+            <div class="editor-css flex-grow-1">
+              <textarea name="css" id="edit-cssarea">{{ css | default(value="") }}</textarea>
+            </div>
+            <div class="resize-handle"></div> 
+          </div>
+          <div class="container-base" id="edit-preview"></div>
+        </div>
+
+        {% if can_edit %}
+          {% if is_main_owner or is_admin %}
+          <div class="flex flex-row flex-justify-end flex-gap">
+            <input type="text" id="collaborators_usernames" name="collaborators_usernames"
+                   class="text-input" placeholder="user1, user2, user3"
+                   value="{{ collaborators_usernames | default(value='') }}" />
+            <input type="text" id="new_owner_username" name="new_owner_username" class="text-input" placeholder="Change Owner" />
+          </div>
+          {% endif %}
+
+          <div class="flex flex-align-center flex-justify-between">
+            <button type="submit" class="button" name="action" value="save">Save</button>
+            {% if is_main_owner or is_admin %}
+              <button type="submit" class="button" name="action" value="delete"
+                      onclick="return confirm('Are you sure you want to delete this paste?');">
+                Delete
+              </button>
+            {% endif %}
+          </div>
+        {% else %}
+          <p>You do not have permission to edit this paste.</p>
+        {% endif %}
+      </div>
+    </div>
+    <div class="tab-content" id="full-preview-tab" style="display: none;">
+      <div class="container-base text-container full-preview-container">
+        <iframe id="full-preview-iframe" style="width: 100%; height: 675px; border: none;"></iframe>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}
