@@ -1,0 +1,330 @@
+/* dashboard */
+.pastes-section {
+  width: 600px;
+}
+
+.search-dropdown {
+  margin-bottom: var(--gap);
+}
+
+.search-row {
+  margin-bottom: var(--gap);
+}
+
+.search-box {
+  flex: 1;
+}
+
+.search-box input[type="text"] {
+  width: 100%;
+  padding: var(--padding-buttons);
+  border-radius: var(--border-radius);
+  border: none;
+  background-color: var(--accent-background-color);
+  color: var(--text-color);
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.search-box input::placeholder {
+  color: var(--accent-text-color);
+  opacity: 0.7;
+}
+
+.dropdown {
+  position: relative;
+  width: 300px;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.selected {
+  background-color: var(--container-background-color);
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  padding: var(--padding-buttons);
+}
+
+.options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--background-color);
+  border: 3px solid var(--container-background-color);
+  border-radius: var(--border-radius);
+  max-height: 300px;
+  z-index: 1000;
+}
+
+.options div {
+  padding: var(--padding-buttons);
+  cursor: pointer;
+}
+
+.options div:hover {
+  background-color: var(--accent-background-color);
+}
+
+.pastes-container {
+  background-color: var(--container-background-color);
+  max-height: 550px;
+  border-radius: 0 8px 8px 8px;
+  padding: var(--padding-containers);
+  color: var(--text-color);
+}
+
+table.pastes-table {
+  width: 100%;
+  color: var(--text-color);
+  border-collapse: separate;
+  border-spacing: 0 5px;
+}
+
+table.pastes-table td {
+  background-color: var(--background-color);
+  border-radius: var(--border-radius);
+  padding: var(--padding-buttons);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+table.pastes-table td a {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+table.pastes-table td:hover {
+  transform: scale(1.02);
+}
+
+.pagination-controls {
+  margin: var(--gap) 0;
+}
+
+/*register and login*/
+
+.auth-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center; 
+  align-items: center;
+  gap: 2rem;
+  padding: var(--padding-containers);
+  border: 1px solid var(--accent-text-color);
+  border-radius: var(--border-radius);
+  background-color: var(--container-background-color);
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.auth-image {
+  max-width: 350px;
+  flex-shrink: 0; 
+}
+
+.auth-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: var(--border-radius);
+  display: block;
+}
+
+.auth-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 350px; 
+}
+
+.auth-container input[type="text"],
+.auth-container input[type="password"],
+.auth-container input[type="submit"] {
+    width: 100%;
+    padding: var(--padding-buttons);
+    margin-top: 4px;
+    margin-bottom: 10px;
+    border-radius: var(--border-radius);
+    border: 1px solid var(--accent-text-color);
+    font-size: 1rem;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    transition: border-color 0.3s ease;
+}
+
+.auth-container input[type="text"]:focus,
+.auth-container input[type="password"]:focus {
+    outline: none;
+    border-color: var(--link-color);
+}
+
+.error-message {
+    color: #eb7365;
+    font-size: 0.9rem;
+}
+
+.success-message {
+    padding: var(--padding-containers);
+    border: 1px solid #27ae60;
+    background-color: #e0ffe0;
+    width: 100%;
+    border-radius: var(--border-radius);
+    color: #145214;
+}
+
+/* profile */
+
+.profile {
+  width: 500px;
+  min-height: 568px;
+  background-color: var(--container-background-color);
+  padding: var(--padding-containers);
+  border-radius: var(--border-radius);
+}
+
+.picture-id-section {
+  background-color: var(--accent-background-color);
+  padding: var(--padding-containers);
+  border-radius: var(--border-radius);
+}
+
+.id-section h1,
+.id-section h2 {
+  margin: 0;
+}
+
+.id-section {
+  align-items: flex-start; 
+  padding: var(--padding-buttons);
+}
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  border-radius: var(--border-radius);
+}
+
+.profile-bio-section p {
+  margin: 0;
+  padding: 0;
+}
+
+.profile-bio-section {
+  background-color: var(--accent-background-color);
+  border-radius: var(--border-radius);
+  padding: var(--padding-containers);
+  word-wrap: break-word;
+  overflow: auto;
+}
+
+.friends-section {
+  min-width: 450px;
+}
+
+.friends-section h2 {
+  text-align: center;
+  margin: 0;
+  background-color: var(--accent-background-color);
+  padding: var(--padding-buttons);
+  border-radius: var(--border-radius);
+}
+
+.friends-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: var(--gap);
+  background-color: var(--container-background-color);
+  padding: var(--padding-containers);
+  border-radius: var(--border-radius);
+}
+
+.friend-card {
+  text-align: center;
+}
+
+.friend-card h3 {
+  margin: 0;
+  padding: 0;
+}
+
+.friend-picture {
+  width: 130px;
+  height: 130px;
+  border-radius: var(--border-radius);
+}
+
+.friend-card {
+  position: relative;
+  width: 130px;
+  height: 130px;
+}
+
+.friend-card h3 {
+  position: absolute;
+  bottom: .25em;
+  left: 25%;
+  width: 50%;
+  margin: 0;
+  background: var(--container-background-color);
+  font-size: 1.02em;
+  text-align: center;
+  border-radius: var(--border-radius)
+}
+
+/* edit profile */
+.profile-edit-container {
+  max-width: 540px;
+  background-color: var(--container-background-color);
+  padding: var(--padding-containers);
+  border-radius: var(--border-radius);
+}
+
+.form-group {
+  background-color: var(--accent-background-color);
+  padding: var(--padding-containers);
+  border-radius: var(--border-radius);
+}
+
+.form-group label {
+  font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="url"],
+.form-group textarea {
+  padding: var(--padding-buttons);
+  border-radius: var(--border-radius);
+  background: var(--container-background-color);
+  border: none;
+  outline: none;
+  color: var(--text-color);
+}
+
+.form-group input::placeholder {
+  color: var(--accent-text-color);
+  opacity: 0.7;
+}
+
+.form-group textarea {
+  min-height: 80px;
+  border: none;
+  resize: none;
+  outline: none;
+}
+
+.error-messages {
+  color: #fa5252;
+  font-size: 0.96em;
+  list-style: disc;
+  margin: 0.3em 0 0 1.2em;
+  padding: 0;
+}
+
+.button.save {
+  background: #4f8;
+  color: var(--background-color);
+  border: none;
+  align-self: flex-end;
+}
