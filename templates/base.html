@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+  (function() {
+    try {
+      var theme = localStorage.getItem('theme');
+      if (theme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    } catch(e) {}
+  })();
+</script>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        img-src 'self' data: https://file.garden https://files.catbox.moe https://*.neocities.org;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://file.garden https://files.catbox.moe https://*.neocities.org https://cdn.jsdelivr.net;;
+        script-src 'self' 'unsafe-inline' https://file.garden https://files.catbox.moe https://*.neocities.org https://cdn.jsdelivr.net;;
+        connect-src 'self';
+        font-src 'self' https://fonts.gstatic.com https://file.garden https://files.catbox.moe https://*.neocities.org;
+        object-src 'none';
+        frame-src 'none';
+        upgrade-insecure-requests;
+    " />
+
+    <title>{% block title %}{{ title }}{% endblock %}</title>
+
+    <meta name="theme-color" content="#ff9999" />
+    <meta property="og:type" content="website" />
+
+    <link rel="icon" href="/static/favicon.svg" />
+    
+    {% block head %}{% endblock %}
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5/lib/codemirror.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5/theme/mbo.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5/theme/duotone-light.css" />
+    
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5/lib/codemirror.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5/mode/xml/xml.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5/mode/javascript/javascript.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5/mode/htmlmixed/htmlmixed.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/codemirror@5/mode/css/css.js"></script>
+
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <link rel="stylesheet" href="/static/css/user.css" />
+    <script type="module" src="/static/js/theme.js"></script>
+    <script type="module" src="/static/js/main.js"></script>
+
+    {% block head_extra %}{% endblock %}
+</head>
+
+<body>
+  <header class="site-header">
+    {% if current_user is defined %}
+        <p> Logged in as <strong>
+            <a href="{{ user_profile_url }}">
+                {{ current_user.username }}
+                {% if current_user.profile_picture_url %}
+                    <img src="{{ current_user.profile_picture_url }}" alt="Profile picture" style="height: 1.5em; width: 1.5em; border-radius: 10%; vertical-align: middle; margin-right: 0.4em;">
+                {% endif %}
+            </a>
+        </strong></p>
+    {% else %}
+        <p>Welcome, guest!</p>
+    {% endif %}
+  </header>
+
+  <main class="{% block main_class %}main-content{% endblock %}">
+    {% block base_content %}
+    {% endblock %}
+  </main>
+
+
+  <footer class="site-footer">
+    <hr class="footer-line" />
+      <a href="{{ paste_form_url }}">new</a> · <a href="{{ info_url }}">info</a> · <a href="{{ dashboard_url}} ">dashboard</a> ·
+      {% if is_logged_in %}
+      <a href="{{ logout_url }}">logout</a>
+      {% else %}
+      <a href="{{ login_url }}">login</a> · <a href="{{ register_url }}">register</a>
+      {% endif %}   
+    </a>
+  </footer>
+</body>
+</html>
+

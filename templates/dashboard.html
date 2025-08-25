@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - {{ site_name }}{% endblock %}
+
+{% block base_content %}
+<div class="flex flex-column flex-align-center">
+    <div class="pastes-section flex flex-column">
+        <div class="flex flex-justify-space flex-gap">
+            <div class="tab-button active">Pastes</div>
+            <div class="search-dropdown flex flex-justify-end flex-align-center flex-gap">
+                <div class="search-box"><input type="text" id="search" name="search" placeholder="Search..." value="">
+                </div>
+                 <div class="dropdown">
+                    <div class="selected">Sort By</div>
+                    <div class="options" style="display: none;">
+                        <div data-value="">Sort by</div>
+                        <div data-value="a-z">A-Z</div>
+                        <div data-value="created">Created (Latest to Oldest)</div>
+                        <div data-value="edited">Edited (Latest to Oldest)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pastes-container">
+            <table class="pastes-table">
+                <tbody>
+                {% for paste in pastes %}
+                    <tr>
+                        <td><a href="/{{ paste.token }}">{{ paste.token }}</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination-controls flex flex-align-center flex-justify-between">
+            <a class="button disabled">Back</a>
+            <a class="button disabled">Next</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
