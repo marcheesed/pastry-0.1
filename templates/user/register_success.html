@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome to {{ site_name }}!{% endblock %}
+
+{% block base_content %}
+<div class="flex flex-column flex-justify-center flex-align-center">
+    <h1>Welcome to {{ site_name }}!</h1>
+    <p>Your account has been created and you are now logged in.</p>
+    <p>This will be the only time you will be able to see this page.</p>
+
+    <div class="success-message">
+      <strong>Your Secret Token:</strong> <code>{{ user_token }}</code><br>
+      Please save this token securely. You will need it to log in if you log out.
+    </div>
+
+    <p><a href="/">Continue to homepage</a></p>
+</div>
+{% endblock %}

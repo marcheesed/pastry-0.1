@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Profile - {{ username }}{% endblock %}
+
+{% block base_content %}
+<div class="flex flex-row flex-gap">
+    <div class="profile flex flex-column flex-gap">
+      <div class="picture-id-section flex flex-row flex-gap">
+        {% if profile_picture_url %}
+        <img src="{{ profile_picture_url }}" alt="{{ username }}'s profile picture" class="profile-picture"/>
+        {% else %}
+        <img src="/static/images/stock_cupcake.jpg" alt="Default profile picture" class="profile-picture"/>
+        {% endif %}
+        <div class="id-section flex flex-column flex-gap">
+          <h1>Display name</h1>
+          <h2>{{ username }}</h2>
+          {% if is_own_profile %}
+        <a href="?edit=true" class="button">Edit Profile</a>
+      {% elif current_user %}
+        {% if is_friend %}
+          <form action="/friend/remove/{{ username }}" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <input type="submit" value="Remove Friend" class="button">
+          </form>
+        {% else %}
+          <form action="/friend/add/{{ username }}" method="post">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+            <input type="submit" value="Add Friend" class="button">
+          </form>
+        {% endif %}
+      {% endif %}
+        </div>
+      </div>
+      <div class="profile-bio-section flex-grow-1">
+        <p>{{ bio | default(value="No bio available.") }}</p>
+      </div>
+    </div>
+
+    <div class="friends-section flex flex-column flex-gap">
+      <h2>{{ username }}'s friends</h2>
+      <div class="friends-grid">
+        {% if friends %}
+        {% for friend in friends %}
+          <div class="friend-card">
+            {% if friend.profile_picture_url %}
+              <img src="{{ friend.profile_picture_url }}" alt="{{ friend.username }}'s profile picture" class="friend-picture"/>
+            {% else %}
+              <img src="/static/images/stock_cupcake.jpg" alt="Default profile picture" class="friend-picture"/>
+            {% endif %}
+            <h3><a href="/profile/{{ friend.username }}">{{ friend.username }}</a></h3>
+          </div>
+          {% endfor %}
+          {% else %}
+          <p>No friends yet.</p>
+          {% endif %}
+        </div>
+        <div class="flex flex-align-center flex-justify-between">
+        {% set prev_page = current_page - 1 %}
+        {% set next_page = current_page + 1 %}
+        
+        {% if prev_page >= 1 %}
+        <a href="{% if prev_page == 1 %}?{% else %}?page={{ prev_page }}{% endif %}" class="button">Back</a>
+        {% else %}
+        <a class="button disabled" aria-disabled="true">Back</a>
+        {% endif %}
+        
+        {% if next_page <= total_pages %}
+        <a href="?page={{ next_page }}" class="button">Next</a>
+        {% else %}
+        <a class="button disabled" aria-disabled="true">Next</a>
+        {% endif %}
+      </div>
+    </div>
+</div>
+{% endblock %}

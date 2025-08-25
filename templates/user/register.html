@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Register - {{ site_name }}{% endblock %}
+
+{% block base_content %}
+<div class="auth-container flex flex-justify-center flex-align-center">
+    <div class="auth-image">
+        <img src="/static/images/stock_cupcake.jpg" alt="Pastry-chan">
+    </div>
+
+    <div class="auth-form-wrapper">
+        <h1>Register</h1>
+        <form method="POST" action="{{ register_url }}">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+
+            <p>
+                <label for="username">Username</label><br>
+                <input type="text" id="username" name="username" size="32" value='{{ username | default(value="") }}'><br>
+                {% if errors.username %}
+                    {% for error in errors.username %}
+                        <span class="error-message">{{ error }}</span><br>
+                    {% endfor %}
+                {% endif %}
+            </p>
+
+            <p><input type="submit" value="Register"></p>
+        </form>
+    </div>
+</div>
+{% endblock %}

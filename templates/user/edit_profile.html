@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Profile - {{ username }}{% endblock %}
+
+{% block base_content %}
+<div class="profile-edit-container">
+  <form action="/profile/edit" method="POST" class="flex flex-column flex-gap">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    
+    <div class="form-group flex flex-row flex-gap">
+      <div class="flex flex-column flex-gap flex-1">
+        <div class="flex flex-column flex-gap">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" placeholder="Username" value="{{ username }}" required />
+          {% if errors.username %}
+            <ul class="error-messages">
+              {% for error in errors.username %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+        <div class="flex flex-column flex-gap">
+          <label for="profile_picture_url">Profile Picture URL</label>
+          <input type="url" id="profile_picture_url" name="profile_picture_url" placeholder="Profile picture URL" value="{{ profile_picture_url | default(value='') }}" />
+        </div>
+      </div>
+      <div class="flex flex-align-center">
+        {% if profile_picture_url %}
+          <img src="{{ profile_picture_url }}" alt="Profile picture preview" class="profile-picture"/>
+        {% else %}
+          <img src="/static/images/stock_cupcake.jpg" alt="Default profile" class="profile-picture"/>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="form-group flex flex-column flex-gap">
+      <label for="bio">Bio</label>
+      <textarea id="bio" name="bio" rows="8" maxlength="515" placeholder="Bio">{{ bio | default(value="") }}</textarea>
+    </div>
+
+    <button type="submit" class="button save">Save Changes</button>
+  </form>
+</div>
+{% endblock %}
