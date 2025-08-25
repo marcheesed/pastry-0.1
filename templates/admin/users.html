@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Admin - User Management - {{ site_name }}{% endblock %}
+
+{% block head_extra %}
+
+{% endblock %}
+
+{% block main_class %}admin-content{% endblock %}
+
+{% block base_content %}
+<h1>User Management</h1>
+
+<table class="user-table">
+    <thead>
+        <tr>
+            <th>Username</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.0 }}</td>
+            <td>{{ user.2 }}</td>
+            <td>
+                {% if user.1 %}
+                Banned
+                {% else %}
+                Active
+                {% endif %}
+            </td>
+            <td>
+                {% if user.1 %}
+                <form action="/admin/unban" method="POST" class="action-form">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                    <input type="hidden" name="username" value="{{ user.0 }}">
+                    <button type="submit" class="action-button unban-button">Unban</button>
+                </form>
+                {% else %}
+                <form action="/admin/ban" method="POST" class="action-form">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+                    <input type="hidden" name="username" value="{{ user.0 }}">
+                    <button type="submit" class="action-button ban-button">Ban</button>
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
