@@ -10,3 +10,6 @@ this was our child. we built it together over months and i loved watching it gro
 please, if you use this, credit us. not just me, but him too. even if its just "to stanley whoever you are" because i do not think i knew him that well either.
 
 thank you for everything! -nurse/marcy
+
+
+also uh this is probably super shitty my first repo haha
